@@ -21,6 +21,7 @@ pub use self::_Unwind_Action::*;
 pub use self::_Unwind_State::*;
 pub use self::_Unwind_Reason_Code::*;
 
+use core::kinds::Copy;
 use libc;
 
 #[cfg(any(not(target_arch = "arm"), target_os = "ios"))]
@@ -32,6 +33,9 @@ pub enum _Unwind_Action {
     _UA_FORCE_UNWIND = 8,
     _UA_END_OF_STACK = 16,
 }
+
+#[cfg(any(not(target_arch = "arm"), target_os = "ios"))]
+impl Copy for _Unwind_Action {}
 
 #[cfg(target_arch = "arm")]
 #[repr(C)]
